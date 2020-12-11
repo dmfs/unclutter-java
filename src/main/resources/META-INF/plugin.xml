@@ -1,0 +1,59 @@
+<idea-plugin>
+    <id>org.dmfs.intellij.unclutter</id>
+    <name>Unclutter Java</name>
+    <vendor email="marten@dmfs.org" url="https://dmfs.org">dmfs GmbH</vendor>
+
+    <description><![CDATA[
+        <p>
+        Reduce cognitive load when parsing Java code by folding some of the verbose syntax.
+        </p>
+        <h2>Functional Interfaces</h2>
+        <p>
+            Reduces usages of functional interfaces to what you would expect when you come from a language like Python.
+            <h3>Examples</h3>
+            <pre><code>
+Function&lt;Baz, Buzz&gt; f = foo::bar;
+f.apply(baz);  // unfolded
+f(baz);        // folded
+
+Predicate&lt;String&gt; isBlank = String::isBlank;
+if (isBlank.test("not blank")) { … } // unfolded
+if (isBlank("not blank")) { … }      // folded
+</code></pre>
+            Note, currently this is applied to all interfaces which have only a single method and sometimes might yield
+            unexpected results.
+        </p>
+        <h2>Creating instances</h2>
+        <p>
+            Reduces constructor calls by removing visual noise.
+            <h3>Examples</h3>
+            <pre><code>
+new Foo(bar, baz); // unfolded
+Foo(bar, baz);     // folded
+
+new Foo&lt;&gt;(bar, baz); // unfolded
+Foo⋄(bar, baz);            // folded
+
+new com.example.Foo&lt;String&gt;(bar, baz); // unfolded
+…Foo⋄(bar, baz);                             // folded
+</code></pre>
+        </p>
+    ]]></description>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+    <depends>com.intellij.modules.java</depends>
+
+
+    <extensions defaultExtensionNs="com.intellij">
+        <lang.foldingBuilder language="JAVA" implementationClass="org.dmfs.intellij.unclutter.UnclutterFoldingBuilder"/>
+        <codeFoldingOptionsProvider instance="org.dmfs.intellij.unclutter.UnclutterFoldingOptionsProvider"/>
+        <applicationService serviceImplementation="org.dmfs.intellij.unclutter.UnclutterFoldingSettings"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>
