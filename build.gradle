@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'org.dmfs'
-version '0.1.2'
+version '0.2.0'
 
 repositories {
     mavenCentral()
@@ -19,12 +19,17 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version '2020.3'
+    version '2020.1'
+    updateSinceUntilBuild false
     plugins 'java'
 }
 
 patchPluginXml {
     changeNotes """
+      <h1>0.2.0</h1>
+      <ul>
+          <li>support Intellij 2020.1</li>
+      </ul>
       <h1>0.1.2</h1>
       <ul>
           <li>fix changelog</li>

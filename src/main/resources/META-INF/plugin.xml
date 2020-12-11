@@ -2,6 +2,7 @@
     <id>org.dmfs.intellij.unclutter</id>
     <name>Unclutter Java</name>
     <vendor email="marten@dmfs.org" url="https://dmfs.org">dmfs GmbH</vendor>
+    <idea-version since-build="201.6668" until-build="203.*"/>
 
     <description><![CDATA[
         <p>
@@ -21,11 +22,11 @@ if (isBlank.test("not blank")) { … } // unfolded
 if (isBlank("not blank")) { … }      // folded
 </code></pre>
             Note, currently this is applied to all interfaces which have only a single method and sometimes might yield
-            unexpected results.
+            unexpected results (e.g. when using <code>Comparable</code>s).
         </p>
         <h2>Creating instances</h2>
         <p>
-            Reduces constructor calls by removing visual noise.
+            Removes visual noise from constructor calls.
             <h3>Examples</h3>
             <pre><code>
 new Foo(bar, baz); // unfolded
@@ -37,6 +38,9 @@ Foo⋄(bar, baz);            // folded
 new com.example.Foo&lt;String&gt;(bar, baz); // unfolded
 …Foo⋄(bar, baz);                             // folded
 </code></pre>
+        </p>
+        <p>
+        Sources available at <a href="https://github.com/dmfs/unclutter-java">https://github.com/dmfs/unclutter-java</a>
         </p>
     ]]></description>
 
