@@ -48,7 +48,7 @@ public class PsiMethodCallExpressionFunction implements Function<PsiMethodCallEx
         PsiExpressionList arguments = psiMethodCallExpression.getArgumentList();
         if (arguments.isEmpty()) {
             return singletonList(new FoldingDescriptor(psiMethodCallExpression,
-                    arguments.getTextRange().getStartOffset(),
+                    methodExpression.getReferenceNameElement().getTextRange().getStartOffset() - 1,
                     arguments.getTextRange().getEndOffset(),
                     group,
                     "()"));
