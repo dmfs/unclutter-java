@@ -4,15 +4,16 @@ plugins {
 }
 
 group 'org.dmfs'
-version '0.2.0'
+version '0.2.1'
+
+java.targetCompatibility = JavaVersion.VERSION_1_8
+java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile 'org.dmfs:jems:1.43'
-
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
@@ -26,6 +27,10 @@ intellij {
 
 patchPluginXml {
     changeNotes """
+      <h1>0.2.1</h1>
+      <ul>
+          <li>fix target compatibility to make this work with Android Studio</li>
+      </ul>
       <h1>0.2.0</h1>
       <ul>
           <li>support Intellij 2020.1</li>
