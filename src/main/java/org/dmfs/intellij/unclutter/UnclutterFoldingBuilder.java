@@ -30,6 +30,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethodCallExpression;
 import com.intellij.psi.PsiNewExpression;
 import com.intellij.psi.util.PsiTreeUtil;
+import org.dmfs.intellij.unclutter.functions.ExpressExpressionFunction;
 import org.dmfs.intellij.unclutter.functions.PsiMethodCallExpressionFunction;
 import org.dmfs.intellij.unclutter.functions.PsiNewExpressionFunction;
 import org.jetbrains.annotations.NotNull;
@@ -37,15 +38,17 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
+
 
 /**
  * Folds invocations of constructors and functional interface methods.
  */
-public class UnclutterFoldingBuilder extends FoldingBuilderEx {
+public class UnclutterFoldingBuilder extends FoldingBuilderEx
+{
 
     @Override
-    public FoldingDescriptor @NotNull [] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
+    public FoldingDescriptor @NotNull [] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick)
+    {
         List<FoldingDescriptor> descriptors = new ArrayList<>();
         collectRegionsRecursively(root, document, descriptors);
         return descriptors.toArray(FoldingDescriptor.EMPTY);
@@ -54,30 +57,44 @@ public class UnclutterFoldingBuilder extends FoldingBuilderEx {
 
     private void collectRegionsRecursively(@NotNull final PsiElement node,
                                            @NotNull final Document document,
-                                           @NotNull List<FoldingDescriptor> descriptors) {
+                                           @NotNull List<FoldingDescriptor> descriptors)
+    {
         UnclutterFoldingSettings.State settings = UnclutterFoldingSettings.getInstance().getState();
-        PsiTreeUtil.findChildrenOfAnyType(node, PsiMethodCallExpression.class, PsiNewExpression.class)
-                .forEach(
-                        expression -> {
-                            if (expression instanceof PsiMethodCallExpression) {
-                                descriptors.addAll(new PsiMethodCallExpressionFunction(settings).apply((PsiMethodCallExpression) expression));
-                            }
-                            if (expression instanceof PsiNewExpression) {
-                                descriptors.addAll(new PsiNewExpressionFunction(settings).apply((PsiNewExpression) expression));
-                            }
-                        }
-                );
+
+        PsiMethodCallExpressionFunction methodCallFunction = new PsiMethodCallExpressionFunction(settings);
+        PsiNewExpressionFunction newFunction = new PsiNewExpressionFunction(settings);
+        ExpressExpressionFunction expressFunction = new ExpressExpressionFunction(settings);
+
+        PsiTreeUtil.findChildrenOfAnyType(node,
+            PsiMethodCallExpression.class,
+            PsiNewExpression.class)
+            .forEach(
+                expression -> {
+                    if (expression instanceof PsiMethodCallExpression)
+                    {
+                        descriptors.addAll(methodCallFunction.apply((PsiMethodCallExpression) expression));
+                    }
+                    if (expression instanceof PsiNewExpression)
+                    {
+                        descriptors.addAll(expressFunction.apply((PsiNewExpression) expression));
+                        descriptors.addAll(newFunction.apply((PsiNewExpression) expression));
+                    }
+                }
+            );
     }
 
 
     @Nullable
     @Override
-    public String getPlaceholderText(@NotNull final ASTNode node) {
+    public String getPlaceholderText(@NotNull final ASTNode node)
+    {
         return "¯\\_(ツ)_/¯";
     }
 
+
     @Override
-    public boolean isCollapsedByDefault(@NotNull final ASTNode node) {
+    public boolean isCollapsedByDefault(@NotNull final ASTNode node)
+    {
         return true;
     }
 

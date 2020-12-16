@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'org.dmfs'
-version '0.2.1'
+version '0.3.0'
 
 java.targetCompatibility = JavaVersion.VERSION_1_8
 java.sourceCompatibility = JavaVersion.VERSION_1_8
@@ -27,6 +27,10 @@ intellij {
 
 patchPluginXml {
     changeNotes """
+      <h1>0.3.0</h1>
+      <ul>
+          <li>support folding of <a href="https://github.com/dmfs/express">express-json</a></li>
+      </ul>
       <h1>0.2.1</h1>
       <ul>
           <li>fix target compatibility to make this work with Android Studio</li>

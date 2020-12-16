@@ -1,8 +1,11 @@
 <idea-plugin>
     <id>org.dmfs.intellij.unclutter</id>
     <name>Unclutter Java</name>
-    <vendor email="marten@dmfs.org" url="https://dmfs.org">dmfs GmbH</vendor>
-    <idea-version since-build="201.6668" until-build="203.*"/>
+    <vendor email="marten@dmfs.org"
+            url="https://dmfs.org">dmfs GmbH
+    </vendor>
+    <idea-version since-build="201.6668"
+                  until-build="203.*"/>
 
     <description><![CDATA[
         <p>
@@ -39,6 +42,25 @@ new com.example.Foo&lt;String&gt;(bar, baz); // unfolded
 …Foo⋄(bar, baz);                             // folded
 </code></pre>
         </p>
+
+            <h2>express-json</h2>
+        <p>
+            Folds (simple) <a href="https://github.com/dmfs/express">express-json</a> compositions into something that
+            looks like JSON.
+            <h3>Examples</h3>
+            <pre><code>
+new Object(
+   new Member("a", "b"),
+   new Member("c", new Array(1, 2, 3))
+); // unfolded
+
+{
+   "a": "b",
+   "c": [1, 2, 3]
+};  // folded
+</code></pre>
+        </p>
+        <h1>Source Code</h1>
         <p>
         Sources available at <a href="https://github.com/dmfs/unclutter-java">https://github.com/dmfs/unclutter-java</a>
         </p>
@@ -52,7 +74,8 @@ new com.example.Foo&lt;String&gt;(bar, baz); // unfolded
 
 
     <extensions defaultExtensionNs="com.intellij">
-        <lang.foldingBuilder language="JAVA" implementationClass="org.dmfs.intellij.unclutter.UnclutterFoldingBuilder"/>
+        <lang.foldingBuilder language="JAVA"
+                             implementationClass="org.dmfs.intellij.unclutter.UnclutterFoldingBuilder"/>
         <codeFoldingOptionsProvider instance="org.dmfs.intellij.unclutter.UnclutterFoldingOptionsProvider"/>
         <applicationService serviceImplementation="org.dmfs.intellij.unclutter.UnclutterFoldingSettings"/>
     </extensions>
