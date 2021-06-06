@@ -1,10 +1,10 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '0.6.5'
+    id 'org.jetbrains.intellij' version '0.7.3'
 }
 
 group 'org.dmfs'
-version '0.3.1'
+version '0.4.0'
 
 java.targetCompatibility = JavaVersion.VERSION_11
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -27,6 +27,11 @@ intellij {
 
 patchPluginXml {
     changeNotes """
+      <h1>0.4.0</h1>
+      <ul>
+          <li>Exclude Comparable from function folding</li>
+          <li>Support folding log statements into small comments</li>
+      </ul>
       <h1>0.3.1</h1>
       <ul>
           <li>Support IntelliJ 2021.1</li>

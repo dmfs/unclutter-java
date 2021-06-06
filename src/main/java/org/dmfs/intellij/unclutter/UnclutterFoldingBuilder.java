@@ -26,14 +26,10 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.FoldingBuilderEx;
 import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.openapi.editor.Document;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiMethodCallExpression;
-import com.intellij.psi.PsiNewExpression;
+import com.intellij.psi.*;
 import com.intellij.psi.util.PsiTreeUtil;
 
-import org.dmfs.intellij.unclutter.functions.ExpressExpressionFunction;
-import org.dmfs.intellij.unclutter.functions.PsiMethodCallExpressionFunction;
-import org.dmfs.intellij.unclutter.functions.PsiNewExpressionFunction;
+import org.dmfs.intellij.unclutter.functions.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -65,20 +61,34 @@ public class UnclutterFoldingBuilder extends FoldingBuilderEx
         PsiMethodCallExpressionFunction methodCallFunction = new PsiMethodCallExpressionFunction(settings);
         PsiNewExpressionFunction newFunction = new PsiNewExpressionFunction(settings);
         ExpressExpressionFunction expressFunction = new ExpressExpressionFunction(settings);
+        PsiLogExpressionFunction loggingFunction = new PsiLogExpressionFunction(settings);
+        PsiLogConsumerFunction logConsumerFunction = new PsiLogConsumerFunction(settings);
+        PsiLogStatementFunction logStatementFunction = new PsiLogStatementFunction(settings);
 
         PsiTreeUtil.findChildrenOfAnyType(node,
             PsiMethodCallExpression.class,
-            PsiNewExpression.class)
+            PsiNewExpression.class,
+            PsiExpressionStatement.class,
+            PsiLambdaExpression.class)
             .forEach(
                 expression -> {
                     if (expression instanceof PsiMethodCallExpression)
                     {
                         descriptors.addAll(methodCallFunction.apply((PsiMethodCallExpression) expression));
+                        descriptors.addAll(loggingFunction.apply((PsiMethodCallExpression) expression));
                     }
                     if (expression instanceof PsiNewExpression)
                     {
                         descriptors.addAll(expressFunction.apply((PsiNewExpression) expression));
                         descriptors.addAll(newFunction.apply((PsiNewExpression) expression));
+                    }
+                    if (expression instanceof PsiLambdaExpression)
+                    {
+                        descriptors.addAll(logConsumerFunction.apply((PsiLambdaExpression) expression));
+                    }
+                    if (expression instanceof PsiExpressionStatement)
+                    {
+                        descriptors.addAll(logStatementFunction.apply((PsiExpressionStatement) expression));
                     }
                 }
             );
@@ -100,3 +110,4 @@ public class UnclutterFoldingBuilder extends FoldingBuilderEx
     }
 
 }
+
