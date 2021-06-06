@@ -30,6 +30,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethodCallExpression;
 import com.intellij.psi.PsiNewExpression;
 import com.intellij.psi.util.PsiTreeUtil;
+
 import org.dmfs.intellij.unclutter.functions.ExpressExpressionFunction;
 import org.dmfs.intellij.unclutter.functions.PsiMethodCallExpressionFunction;
 import org.dmfs.intellij.unclutter.functions.PsiNewExpressionFunction;
@@ -56,8 +57,8 @@ public class UnclutterFoldingBuilder extends FoldingBuilderEx
 
 
     private void collectRegionsRecursively(@NotNull final PsiElement node,
-                                           @NotNull final Document document,
-                                           @NotNull List<FoldingDescriptor> descriptors)
+        @NotNull final Document document,
+        @NotNull List<FoldingDescriptor> descriptors)
     {
         UnclutterFoldingSettings.State settings = UnclutterFoldingSettings.getInstance().getState();
 

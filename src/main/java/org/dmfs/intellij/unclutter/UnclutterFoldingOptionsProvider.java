@@ -3,8 +3,11 @@ package org.dmfs.intellij.unclutter;
 import com.intellij.application.options.editor.CodeFoldingOptionsProvider;
 import com.intellij.openapi.options.BeanConfigurable;
 
-public class UnclutterFoldingOptionsProvider extends BeanConfigurable<UnclutterFoldingSettings.State> implements CodeFoldingOptionsProvider {
-    protected UnclutterFoldingOptionsProvider() {
+
+public class UnclutterFoldingOptionsProvider extends BeanConfigurable<UnclutterFoldingSettings.State> implements CodeFoldingOptionsProvider
+{
+    protected UnclutterFoldingOptionsProvider()
+    {
         super(UnclutterFoldingSettings.getInstance().getState());
         UnclutterFoldingSettings.State settings = UnclutterFoldingSettings.getInstance().getState();
         setTitle("Unclutter Java");

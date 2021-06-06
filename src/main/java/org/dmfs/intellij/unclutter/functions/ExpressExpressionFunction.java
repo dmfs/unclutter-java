@@ -5,6 +5,7 @@ import com.intellij.openapi.editor.FoldingGroup;
 import com.intellij.psi.PsiExpressionList;
 import com.intellij.psi.PsiJavaCodeReferenceElement;
 import com.intellij.psi.PsiNewExpression;
+
 import org.dmfs.intellij.unclutter.UnclutterFoldingSettings;
 
 import java.util.List;

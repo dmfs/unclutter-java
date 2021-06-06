@@ -3,6 +3,7 @@ package org.dmfs.intellij.unclutter;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.Storage;
+
 import org.jetbrains.annotations.NotNull;
 
 
