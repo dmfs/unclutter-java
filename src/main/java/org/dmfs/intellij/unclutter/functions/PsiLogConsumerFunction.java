@@ -7,13 +7,13 @@ import com.intellij.psi.PsiMethodCallExpression;
 
 import org.dmfs.intellij.unclutter.UnclutterFoldingSettings;
 import org.dmfs.intellij.unclutter.functions.predicates.IsA;
+import org.dmfs.intellij.unclutter.functions.predicates.logging.IsLogging;
 
 import java.util.List;
 import java.util.function.Function;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
-import static org.dmfs.intellij.unclutter.functions.predicates.logging.IsLogging.isLogExpression;
 
 
 public class PsiLogConsumerFunction implements Function<PsiLambdaExpression, List<FoldingDescriptor>>
@@ -30,12 +30,8 @@ public class PsiLogConsumerFunction implements Function<PsiLambdaExpression, Lis
     @Override
     public List<FoldingDescriptor> apply(PsiLambdaExpression psiLambdaExpression)
     {
-        if (!settings.isLogging())
-        {
-            return emptyList();
-        }
-
-        if (!new IsA<PsiElement, PsiMethodCallExpression>(PsiMethodCallExpression.class, isLogExpression()).test(psiLambdaExpression.getBody()))
+        if (!new IsA<PsiElement, PsiMethodCallExpression>(PsiMethodCallExpression.class, IsLogging.LogFolding.forSettings(settings).predicate).test(
+            psiLambdaExpression.getBody()))
         {
             return emptyList();
         }

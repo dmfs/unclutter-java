@@ -16,7 +16,8 @@ public class UnclutterFoldingOptionsProvider extends BeanConfigurable<UnclutterF
         checkBox("Constructor generic arguments", settings::isGenericArguments, settings::setGenericArguments);
         checkBox("Constructor qualification", settings::isNamespace, settings::setNamespace);
         checkBox("express-json", settings::isExpressJson, settings::setExpressJson);
-        checkBox("Logging", settings::isLogging, settings::setLogging);
+        checkBox("Info, debug & trace logging", settings::isDebugLogging, settings::setDebugLogging);
+        checkBox("Warn & error logging", settings::isErrorLogging, settings::setErrorLogging);
 
         createComponent();
     }

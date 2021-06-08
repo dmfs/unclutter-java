@@ -36,7 +36,8 @@ public class UnclutterFoldingSettings implements PersistentStateComponent<Unclut
         unclutterSettings.genericArguments = settings.genericArguments;
         unclutterSettings.namespace = settings.namespace;
         unclutterSettings.expressJson = settings.expressJson;
-        unclutterSettings.logging = settings.logging;
+        unclutterSettings.debugLogging = settings.debugLogging;
+        unclutterSettings.errorLogging = settings.errorLogging;
     }
 
 
@@ -47,7 +48,8 @@ public class UnclutterFoldingSettings implements PersistentStateComponent<Unclut
         private boolean genericArguments = true;
         private boolean namespace = true;
         private boolean expressJson = true;
-        private boolean logging = true;
+        private boolean debugLogging = true;
+        private boolean errorLogging = true;
 
 
         public boolean isFunctionalInterfaces()
@@ -110,15 +112,27 @@ public class UnclutterFoldingSettings implements PersistentStateComponent<Unclut
         }
 
 
-        public boolean isLogging()
+        public boolean isDebugLogging()
         {
-            return logging;
+            return debugLogging;
         }
 
 
-        public void setLogging(boolean logging)
+        public void setDebugLogging(boolean debugLogging)
         {
-            this.logging = logging;
+            this.debugLogging = debugLogging;
+        }
+
+
+        public boolean isErrorLogging()
+        {
+            return errorLogging;
+        }
+
+
+        public void setErrorLogging(boolean errorLogging)
+        {
+            this.errorLogging = errorLogging;
         }
     }
 }

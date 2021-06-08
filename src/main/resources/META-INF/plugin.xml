@@ -60,6 +60,28 @@ new Object(
 };  // folded
 </code></pre>
         </p>
+
+        <h2>Logging</h2>
+        <p>
+            Folds log statements and consumers into a "comment". This reduces distraction and helps to focus on the actual functionality.
+            <h3>Examples</h3>
+            <pre><code>
+log.trace("some trace log"); // unfolded
+
+/*log*/  // folded
+
+rxflowable
+    .map(mapFunction)
+    .doOnNext(value -> log.trace("next value was {}", value)) // unfolded
+    .subscribe(subscriber);
+
+rxflowable
+    .map(mapFunction)
+    .doOnNext(/*log*/) // folded
+    .subscribe(subscriber);
+
+</code></pre>
+        </p>
         <h1>Source Code</h1>
         <p>
         Sources available at <a href="https://github.com/dmfs/unclutter-java">https://github.com/dmfs/unclutter-java</a>

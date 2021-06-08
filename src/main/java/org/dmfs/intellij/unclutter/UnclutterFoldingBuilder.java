@@ -61,7 +61,6 @@ public class UnclutterFoldingBuilder extends FoldingBuilderEx
         PsiMethodCallExpressionFunction methodCallFunction = new PsiMethodCallExpressionFunction(settings);
         PsiNewExpressionFunction newFunction = new PsiNewExpressionFunction(settings);
         ExpressExpressionFunction expressFunction = new ExpressExpressionFunction(settings);
-        PsiLogExpressionFunction loggingFunction = new PsiLogExpressionFunction(settings);
         PsiLogConsumerFunction logConsumerFunction = new PsiLogConsumerFunction(settings);
         PsiLogStatementFunction logStatementFunction = new PsiLogStatementFunction(settings);
 
@@ -75,7 +74,6 @@ public class UnclutterFoldingBuilder extends FoldingBuilderEx
                     if (expression instanceof PsiMethodCallExpression)
                     {
                         descriptors.addAll(methodCallFunction.apply((PsiMethodCallExpression) expression));
-                        descriptors.addAll(loggingFunction.apply((PsiMethodCallExpression) expression));
                     }
                     if (expression instanceof PsiNewExpression)
                     {
