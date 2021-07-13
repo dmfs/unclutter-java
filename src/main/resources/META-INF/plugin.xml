@@ -13,7 +13,8 @@
         </p>
         <h2>Functional Interfaces</h2>
         <p>
-            Reduces usages of functional interfaces to what you would expect when you come from a language like Python.
+            Reduces usages of functional interfaces (interfaces annotated with <code>@FunctionalInterface</code>) to what you would expect when you come
+            from a language like Python.
             <h3>Examples</h3>
             <pre><code>
 Function&lt;Baz, Buzz&gt; f = foo::bar;
@@ -24,8 +25,7 @@ Predicate&lt;String&gt; isBlank = String::isBlank;
 if (isBlank.test("not blank")) { … } // unfolded
 if (isBlank("not blank")) { … }      // folded
 </code></pre>
-            Note, currently this is applied to all interfaces which have only a single method and sometimes might yield
-            unexpected results (e.g. when using <code>Comparable</code>s).
+            Note, only the sole non-<code>default</code> and non-<code>static</code> method of a functional interface is folded.
         </p>
         <h2>Creating instances</h2>
         <p>

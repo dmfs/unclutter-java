@@ -5,13 +5,15 @@ import com.intellij.openapi.editor.FoldingGroup;
 import com.intellij.psi.*;
 
 import org.dmfs.intellij.unclutter.UnclutterFoldingSettings;
+import org.dmfs.intellij.unclutter.functions.predicates.IsAnnotated;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
+import static java.util.Arrays.stream;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 
@@ -19,8 +21,6 @@ import static java.util.Collections.singletonList;
 public class PsiMethodCallExpressionFunction implements Function<PsiMethodCallExpression, List<FoldingDescriptor>>
 {
     private final UnclutterFoldingSettings.State settings;
-
-    private final static Set<String> METHOD_FOLDING_EXCEPTIONS = Set.of("java.lang.Comparable");
 
 
     public PsiMethodCallExpressionFunction(UnclutterFoldingSettings.State settings)
@@ -37,24 +37,26 @@ public class PsiMethodCallExpressionFunction implements Function<PsiMethodCallEx
             return emptyList();
         }
 
-        PsiMethod method = psiMethodCallExpression.resolveMethod();
+        boolean isFunctional =
+            Optional.of(psiMethodCallExpression)
+                .flatMap(e -> Optional.ofNullable(e.resolveMethod()))
+                .stream()
+                .filter(m -> !m.isConstructor())
+                .filter(m -> !m.hasModifierProperty(PsiModifier.STATIC) && !m.hasModifierProperty(PsiModifier.DEFAULT))
+                .flatMap(m -> Stream.concat(Stream.of(m), stream(m.findDeepestSuperMethods())))
+                .map(PsiJvmMember::getContainingClass)
+                .filter(c -> c != null && c.getQualifiedName() != null)
+                .anyMatch(new IsAnnotated("java.lang.FunctionalInterface"));
 
-        if (method == null)
+        if (!isFunctional)
         {
             return emptyList();
         }
 
-        PsiClass clazz = method.getContainingClass();
-
         PsiReferenceExpression methodExpression = psiMethodCallExpression.getMethodExpression();
-
-        if (clazz == null
-            || method.isConstructor()
-            || methodExpression.getQualifierExpression() == null
-            || METHOD_FOLDING_EXCEPTIONS.contains(clazz.getQualifiedName())
-            || (clazz.isInterface() && clazz.getMethods().length != 1
-            || clazz.getMethods().length - clazz.getConstructors().length != 1))
+        if (methodExpression.getQualifierExpression() == null)
         {
+            // this can probably happen for calls to other members without "this."
             return emptyList();
         }
 

@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'org.dmfs'
-version '0.5.0'
+version '0.6.0'
 
 java.targetCompatibility = JavaVersion.VERSION_11
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -27,6 +27,10 @@ intellij {
 
 patchPluginXml {
     changeNotes """
+      <h1>0.6.0</h1>
+      <ul>
+          <li>Improved folding of functional interfaces</li>
+      </ul>
       <h1>0.5.0</h1>
       <ul>
           <li>Log folding improvements</li>
