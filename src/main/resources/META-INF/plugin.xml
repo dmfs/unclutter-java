@@ -82,6 +82,18 @@ rxflowable
 
 </code></pre>
         </p>
+
+        <h2>Comparable.compareTo</h2>
+        <p>
+            Readable calls to compareTo
+            <h3>Examples</h3>
+            <pre><code>
+foo.compareTo(baz) &lt; 0 // unfolded
+foo &lt; baz     // folded
+</code></pre>
+        </p>
+
+
         <h1>Source Code</h1>
         <p>
         Sources available at <a href="https://github.com/dmfs/unclutter-java">https://github.com/dmfs/unclutter-java</a>

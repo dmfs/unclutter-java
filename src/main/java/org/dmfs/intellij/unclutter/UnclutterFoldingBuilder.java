@@ -63,17 +63,23 @@ public class UnclutterFoldingBuilder extends FoldingBuilderEx
         ExpressExpressionFunction expressFunction = new ExpressExpressionFunction(settings);
         PsiLogConsumerFunction logConsumerFunction = new PsiLogConsumerFunction(settings);
         PsiLogStatementFunction logStatementFunction = new PsiLogStatementFunction(settings);
+        ComparatorExpressionFunction comparatorExpressionFunction = new ComparatorExpressionFunction(settings);
 
         PsiTreeUtil.findChildrenOfAnyType(node,
-            PsiMethodCallExpression.class,
-            PsiNewExpression.class,
-            PsiExpressionStatement.class,
-            PsiLambdaExpression.class)
+                PsiMethodCallExpression.class,
+                PsiNewExpression.class,
+                PsiExpressionStatement.class,
+                PsiBinaryExpression.class,
+                PsiLambdaExpression.class)
             .forEach(
                 expression -> {
                     if (expression instanceof PsiMethodCallExpression)
                     {
                         descriptors.addAll(methodCallFunction.apply((PsiMethodCallExpression) expression));
+                    }
+                    if (expression instanceof PsiBinaryExpression)
+                    {
+                        descriptors.addAll(comparatorExpressionFunction.apply((PsiBinaryExpression) expression));
                     }
                     if (expression instanceof PsiNewExpression)
                     {

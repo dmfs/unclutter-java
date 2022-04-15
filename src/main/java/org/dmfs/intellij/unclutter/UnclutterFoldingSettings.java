@@ -1,7 +1,7 @@
 package org.dmfs.intellij.unclutter;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.Storage;
 
 import org.jetbrains.annotations.NotNull;
@@ -24,7 +24,7 @@ public class UnclutterFoldingSettings implements PersistentStateComponent<Unclut
     @NotNull
     public static UnclutterFoldingSettings getInstance()
     {
-        return ServiceManager.getService(UnclutterFoldingSettings.class);
+        return ApplicationManager.getApplication().getService(UnclutterFoldingSettings.class);
     }
 
 
@@ -38,6 +38,7 @@ public class UnclutterFoldingSettings implements PersistentStateComponent<Unclut
         unclutterSettings.expressJson = settings.expressJson;
         unclutterSettings.debugLogging = settings.debugLogging;
         unclutterSettings.errorLogging = settings.errorLogging;
+        unclutterSettings.compareTo = settings.compareTo;
     }
 
 
@@ -50,6 +51,7 @@ public class UnclutterFoldingSettings implements PersistentStateComponent<Unclut
         private boolean expressJson = true;
         private boolean debugLogging = true;
         private boolean errorLogging = true;
+        private boolean compareTo = true;
 
 
         public boolean isFunctionalInterfaces()
@@ -133,6 +135,18 @@ public class UnclutterFoldingSettings implements PersistentStateComponent<Unclut
         public void setErrorLogging(boolean errorLogging)
         {
             this.errorLogging = errorLogging;
+        }
+
+
+        public boolean isCompareTo()
+        {
+            return compareTo;
+        }
+
+
+        public void setCompareTo(boolean compareTo)
+        {
+            this.compareTo = compareTo;
         }
     }
 }
