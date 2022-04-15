@@ -1,10 +1,10 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '0.7.3'
+    id 'org.jetbrains.intellij' version '1.5.3'
 }
 
 group 'org.dmfs'
-version '0.7.0'
+version '0.8.0'
 
 java.targetCompatibility = JavaVersion.VERSION_11
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -20,13 +20,21 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version '2021.1'
-    updateSinceUntilBuild false
-    plugins 'java'
+    version = '2022.1'
+    updateSinceUntilBuild = false
+    plugins = ['java']
+}
+
+publishPlugin {
+    token = idea_token
 }
 
 patchPluginXml {
-    changeNotes """
+    changeNotes = """
+      <h1>0.8.0</h1>
+      <ul>
+          <li>Support Intellij IDEA 2022.1</li>
+      </ul>
       <h1>0.7.0</h1>
       <ul>
           <li>Support Intellij IDEA 2021.2</li>
