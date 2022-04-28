@@ -28,6 +28,6 @@ public final class CallOnInstanceOf implements Predicate<PsiMethodCallExpression
         return psiType != null && Optional.ofNullable(psiMethodCallExpression.resolveMethod())
             .flatMap(e -> Optional.ofNullable(e.getContainingClass()))
             .stream()
-            .anyMatch(psiClass -> psiClass.isInheritor(psiType, true));
+            .anyMatch(psiClass -> psiType.equals(psiClass) || psiClass.isInheritor(psiType, true));
     }
 }

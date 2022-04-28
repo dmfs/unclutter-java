@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'org.dmfs'
-version '0.9.0'
+version '0.9.1'
 
 java.targetCompatibility = JavaVersion.VERSION_11
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -31,6 +31,10 @@ publishPlugin {
 
 patchPluginXml {
     changeNotes = """
+      <h1>0.9.1</h1>
+      <ul>
+          <li>Fix folding of Generic Types that extend Comparable</li>
+      </ul>
       <h1>0.9.0</h1>
       <ul>
           <li>Fold Comparable.compareTo</li>
