@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'org.dmfs'
-version '0.9.2'
+version '0.10.0'
 
 java.targetCompatibility = JavaVersion.VERSION_11
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -20,7 +20,7 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = '2022.2'
+    version = '2022.3'
     updateSinceUntilBuild = false
     plugins = ['java']
 }
@@ -31,6 +31,10 @@ publishPlugin {
 
 patchPluginXml {
     changeNotes = """
+      <h1>0.10.0</h1>
+      <ul>
+          <li>Support Intellij IDEA 2022.3</li>
+      </ul>
       <h1>0.9.2</h1>
       <ul>
           <li>Support Intellij IDEA 2022.2</li>
