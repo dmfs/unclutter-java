@@ -64,6 +64,7 @@ public class UnclutterFoldingBuilder extends FoldingBuilderEx
         PsiLogConsumerFunction logConsumerFunction = new PsiLogConsumerFunction(settings);
         PsiLogStatementFunction logStatementFunction = new PsiLogStatementFunction(settings);
         ComparatorExpressionFunction comparatorExpressionFunction = new ComparatorExpressionFunction(settings);
+        ConfidenceCallFunction confidenceCallFunction = new ConfidenceCallFunction(settings);
 
         PsiTreeUtil.findChildrenOfAnyType(node,
                 PsiMethodCallExpression.class,
@@ -76,6 +77,7 @@ public class UnclutterFoldingBuilder extends FoldingBuilderEx
                     if (expression instanceof PsiMethodCallExpression)
                     {
                         descriptors.addAll(methodCallFunction.apply((PsiMethodCallExpression) expression));
+                        descriptors.addAll(confidenceCallFunction.apply((PsiMethodCallExpression) expression));
                     }
                     if (expression instanceof PsiBinaryExpression)
                     {

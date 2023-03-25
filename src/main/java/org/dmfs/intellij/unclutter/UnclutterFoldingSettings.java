@@ -39,6 +39,7 @@ public class UnclutterFoldingSettings implements PersistentStateComponent<Unclut
         unclutterSettings.debugLogging = settings.debugLogging;
         unclutterSettings.errorLogging = settings.errorLogging;
         unclutterSettings.compareTo = settings.compareTo;
+        unclutterSettings.confidence = settings.confidence;
     }
 
 
@@ -52,6 +53,7 @@ public class UnclutterFoldingSettings implements PersistentStateComponent<Unclut
         private boolean debugLogging = true;
         private boolean errorLogging = true;
         private boolean compareTo = true;
+        private boolean confidence = true;
 
 
         public boolean isFunctionalInterfaces()
@@ -147,6 +149,18 @@ public class UnclutterFoldingSettings implements PersistentStateComponent<Unclut
         public void setCompareTo(boolean compareTo)
         {
             this.compareTo = compareTo;
+        }
+
+
+        public boolean isConfidence()
+        {
+            return confidence;
+        }
+
+
+        public void setConfidence(boolean confidence)
+        {
+            this.confidence = confidence;
         }
     }
 }

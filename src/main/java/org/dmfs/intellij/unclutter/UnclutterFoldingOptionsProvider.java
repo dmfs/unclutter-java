@@ -19,6 +19,7 @@ public class UnclutterFoldingOptionsProvider extends BeanConfigurable<UnclutterF
         checkBox("Info, debug & trace logging", settings::isDebugLogging, settings::setDebugLogging);
         checkBox("Warn & error logging", settings::isErrorLogging, settings::setErrorLogging);
         checkBox("compareTo", settings::isCompareTo, settings::setCompareTo);
+        checkBox("Confidence", settings::isConfidence, settings::setConfidence);
 
         createComponent();
     }

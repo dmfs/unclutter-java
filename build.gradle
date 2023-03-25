@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'org.dmfs'
-version '0.10.0'
+version '0.11.0'
 
 java.targetCompatibility = JavaVersion.VERSION_11
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -31,6 +31,10 @@ publishPlugin {
 
 patchPluginXml {
     changeNotes = """
+      <h1>0.11.0</h1>
+      <ul>
+          <li>Support fording tests with Confidence</li>
+      </ul>
       <h1>0.10.0</h1>
       <ul>
           <li>Support Intellij IDEA 2022.3</li>
