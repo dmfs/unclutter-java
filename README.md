@@ -11,11 +11,11 @@ from a language like Python.
 ### Examples
 
 ```java
-Function&lt;Baz,Buzz&gt;f=foo::bar;
+Function<Baz,Buzz> f=foo::bar;
 f.apply(baz); // unfolded
 f(baz);       // folded
         
-Predicate&lt;String&gt;isBlank=String::isBlank;
+Predicate<String> isBlank=String::isBlank;
 if(isBlank.test("not blank")) { … } // unfolded
 if(isBlank("not blank")) { … }      // folded
 ```
@@ -32,10 +32,10 @@ Removes visual noise from constructor calls.
 new Foo(bar, baz); // unfolded
 Foo(bar, baz);     // folded
 
-new Foo&lt;&gt;(bar, baz); // unfolded
+new Foo<>(bar, baz); // unfolded
 Foo⋄(bar, baz);      // folded
 
-new com.example.Foo&lt;String&gt;(bar, baz); // unfolded
+new com.example.Foo<String>(bar, baz); // unfolded
 …Foo⋄(bar, baz);                       // folded
 ```
 
@@ -89,8 +89,8 @@ Readable calls to compareTo
 ### Examples
 
 ```java
-foo.compareTo(baz) &lt; 0 // unfolded
-foo &lt; baz              // folded
+foo.compareTo(baz) < 0 // unfolded
+foo < baz              // folded
 ```
 
 ## License
