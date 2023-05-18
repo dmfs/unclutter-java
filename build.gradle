@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'org.dmfs'
-version '0.11.0'
+version '0.12.0'
 
 java.targetCompatibility = JavaVersion.VERSION_11
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -20,7 +20,7 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = '2022.3'
+    version = '2023.1.2'
     updateSinceUntilBuild = false
     plugins = ['java']
 }
@@ -31,6 +31,10 @@ publishPlugin {
 
 patchPluginXml {
     changeNotes = """
+      <h1>0.12.0</h1>
+      <ul>
+          <li>Support Intellij IDEA 2023.1</li>
+      </ul>
       <h1>0.11.0</h1>
       <ul>
           <li>Support fording tests with Confidence</li>
