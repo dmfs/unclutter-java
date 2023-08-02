@@ -48,7 +48,7 @@ public class UnclutterFoldingBuilder extends FoldingBuilderEx
     {
         List<FoldingDescriptor> descriptors = new ArrayList<>();
         collectRegionsRecursively(root, document, descriptors);
-        return descriptors.toArray(FoldingDescriptor.EMPTY_ARRAY);
+        return descriptors.toArray(FoldingDescriptor.EMPTY);
     }
 
 
