@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'org.dmfs'
-version '0.16.0'
+version '0.17.0'
 
 java.targetCompatibility = JavaVersion.VERSION_11
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -20,7 +20,7 @@ dependencies {
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version = '2024.1.1'
+    version = '2024.2.0.2'
     updateSinceUntilBuild = false
     plugins = ['java']
 }
@@ -31,6 +31,10 @@ publishPlugin {
 
 patchPluginXml {
     changeNotes = """
+      <h1>0.17.0</h1>
+      <ul>
+          <li>Add Support for Intellij IDEA 2024.2</li>
+      </ul>
       <h1>0.16.0</h1>
       <ul>
           <li>Just upgraded build tools</li>
