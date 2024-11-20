@@ -5,7 +5,7 @@
             url="https://dmfs.org">dmfs GmbH
     </vendor>
     <idea-version since-build="203"
-                  until-build="242.*"/>
+                  until-build="243.*"/>
 
     <description><![CDATA[
         <p>
