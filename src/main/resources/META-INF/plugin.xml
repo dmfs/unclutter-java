@@ -4,8 +4,7 @@
     <vendor email="marten@dmfs.org"
             url="https://dmfs.org">dmfs GmbH
     </vendor>
-    <idea-version since-build="203"
-                  until-build="243.*"/>
+    <idea-version since-build="251"/>
 
     <description><![CDATA[
         <p>

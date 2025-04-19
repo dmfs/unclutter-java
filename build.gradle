@@ -1,16 +1,19 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '1.17.3'
+    id 'org.jetbrains.intellij.platform' version '2.5.0'
 }
 
 group 'org.dmfs'
-version '0.18.0'
+version '0.19.0'
 
-java.targetCompatibility = JavaVersion.VERSION_11
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.targetCompatibility = JavaVersion.VERSION_17
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
 
 dependencies {
@@ -19,10 +22,8 @@ dependencies {
 }
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
-intellij {
-    version = '2024.3'
-    updateSinceUntilBuild = false
-    plugins = ['java']
+intellijPlatform {
+    version = project.version
 }
 
 publishPlugin {
@@ -31,6 +32,10 @@ publishPlugin {
 
 patchPluginXml {
     changeNotes = """
+      <h1>0.19.0</h1>
+      <ul>
+          <li>Add Support for Intellij IDEA 2025.1</li>
+      </ul>
       <h1>0.18.0</h1>
       <ul>
           <li>Add Support for Intellij IDEA 2024.3</li>
@@ -129,6 +134,14 @@ patchPluginXml {
           <li>fix folding of zero argument functional interface calls</li>
       </ul>"""
 }
+
+dependencies {
+    intellijPlatform {
+        intellijIdeaCommunity("2025.1")
+        bundledPlugin("com.intellij.java")
+    }
+}
+
 test {
     useJUnitPlatform()
 }
